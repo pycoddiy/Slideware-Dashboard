@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .card {
+         @apply p-3 rounded-md bg-light h-full
+    }
+
+    .btn {
+        @apply bg-primary text-white px-3 py-2 rounded-md text-sm transition-colors duration-200 hover:bg-accent focus:outline shadow-md
+    }
+
+    h1 {
+        @apply text-xl font-bold text-primary
+    }
+
+    h2 {
+        @apply text-lg font-semibold text-primary
+    }
+
+    h3 {
+        @apply text-sm font-semibold text-black
+    }
+
+    p {
+        @apply text-sm mt-1
+    }
+};
