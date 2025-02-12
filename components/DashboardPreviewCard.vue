@@ -1,8 +1,6 @@
 <template>
     <div class="card text-center shadow-md border border-secondary">
-        <!-- <div class="container m-0 w-full h-[140px] bg-white shadow-md">
-            <<img :src="dashboard.image" alt="Dashboard thumb" class="thumb">
-        </div> -->
+        <Carousel />
         <h3 class="m-1">{{ dashboard.title }}</h3>
         <p class="m-1">{{ dashboard.author.name }}</p>
         <NuxtLink :to="`/dashboards/dashboard-${dashboard.id}`">
@@ -12,6 +10,8 @@
 </template>
 
 <script setup>
+import Carousel from './carousel/Carousel.vue';
+
     const { dashboard } = defineProps(['dashboard']);
 </script>
 
