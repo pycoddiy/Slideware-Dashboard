@@ -1,6 +1,5 @@
 <template>
     <div class="card text-center shadow-md border border-secondary">
-        <Carousel />
         <h3 class="m-1">{{ dashboard.title }}</h3>
         <p class="m-1">{{ dashboard.author.name }}</p>
         <NuxtLink :to="`/dashboards/dashboard-${dashboard.id}`">
