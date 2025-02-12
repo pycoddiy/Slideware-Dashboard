@@ -22,7 +22,8 @@ model User {
 model Content {
   id        Int     @id @default(autoincrement())
   title     String
-  content   String?  
+  content   String
+  preview   String  
   author    User    @relation(fields: [authorId], references: [id])
   authorId  Int
   dashboards Dashboard[]
@@ -32,7 +33,6 @@ model Dashboard {
   id        Int     @id @default(autoincrement())
   title     String
   documents Content[]
-  published Boolean @default(false)
   author    User    @relation(fields: [authorId], references: [id])
   authorId  Int
 }

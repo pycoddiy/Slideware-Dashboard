@@ -21,7 +21,8 @@ export interface User {
 //   model Content {
 //     id        Int     @id @default(autoincrement())
 //     title     String
-//     content   String?  
+//     content   String
+//     preview   String  
 //     author    User    @relation(fields: [authorId], references: [id])
 //     authorId  Int
 //     dashboards Dashboard[]
@@ -29,7 +30,8 @@ export interface User {
 export interface Content {
     id: number;
     title: string;
-    content: string | null;
+    content: string;
+    preview: string;
     author: User;
     authorId: number;
     dashboards: Dashboard[];
@@ -39,7 +41,6 @@ export interface Content {
 //     id        Int     @id @default(autoincrement())
 //     title     String
 //     documents Content[]
-//     published Boolean @default(false)
 //     author    User    @relation(fields: [authorId], references: [id])
 //     authorId  Int
 //   }
@@ -47,7 +48,6 @@ export interface Dashboard {
     id: number;
     title: string;
     documents: Content[];
-    published: boolean;
     author: User;
     authorId: number;
 }
