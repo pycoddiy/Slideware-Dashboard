@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Dashboards</h2>
-        <div  class="grid grid-cols-8 gap-2">
+        <div  class="grid grid-cols-4 gap-2">
             <div v-for="d in dashboards" :key="d.id">
                 <DashboardPreviewCard :dashboard="d" />
             </div>
