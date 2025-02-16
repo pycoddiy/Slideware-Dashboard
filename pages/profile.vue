@@ -1,5 +1,5 @@
 <template>
-    <h1>About</h1>
+    <h1>Edit Profile</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia quaerat enim itaque, magni at optio quidem, iure odit quia debitis, corporis incidunt laborum suscipit aut placeat sequi nobis perspiciatis aperiam.</p>
 </template>
 

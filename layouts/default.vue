@@ -1,21 +1,41 @@
 <template>
-    <div>
-        <header class="m-4 p-4 shadow-lg bg-gradient-to-b from-lighter to-lightest rounded-lg border border-light">
-            <nav class="container p-2 flex justify-between">
-                <ul class="flex gap-4">
-                    <li><NuxtLink to="/" class="btn">Home</NuxtLink></li>
-                    <li><NuxtLink to="/Dashboards" class="btn">Dashboards</NuxtLink></li>
-                    <li><NuxtLink to="/about" class="btn">About</NuxtLink></li>
-                </ul>
-            </nav>
-        </header>
-        <main class="m-4 p-4 shadow-lg rounded-md border border-light">
+    <div class="m-4">
+        <UHorizontalNavigation :links="links" class="p-4 shadow-lg bg-gradient-to-b from-orange-50 to-white rounded-lg border-2 border-green-700">
+            <template #default="{ link }">
+                <span class="group-hover:text-green-700 relative">{{ link.label }}</span>
+            </template>
+        </UHorizontalNavigation>
+        <main class="m-4 p-4 shadow-lg rounded-md border-2 border-green-700">
             <slot />
         </main>
     </div>
 </template>
 
 <script setup>
+
+import { UButton, UHorizontalNavigation } from '#components';
+
+const links = [
+    [
+        {
+            label: 'Dashboards',
+            icon: 'i-heroicons-document-duplicate',
+            to: '/Dashboards',
+        },
+        {
+            label: 'Profile',
+            icon: 'i-heroicons-user',
+            to: '/profile',
+        }
+    ],
+    [
+        {
+            label: 'Logout',
+            icon: 'i-heroicons-lock-closed',
+            to: '/',
+        }
+    ],
+];
 
 </script>
 

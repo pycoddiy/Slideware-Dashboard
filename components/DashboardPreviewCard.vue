@@ -3,14 +3,13 @@
         <Carousel :slides="thumbnails"/>
         <h3 class="m-1">{{ dashboard.title }}</h3>
         <p class="m-1">{{ dashboard.author.name }}</p>
-        <NuxtLink :to="`/dashboards/dashboard-${dashboard.id}`">
-            <p class="btn my-1">Details</p>
-        </NuxtLink>
+        <UButton leading-icon="i-heroicons-magnifying-glass" :to="`/dashboards/dashboard-${dashboard.id}`" class="bg-green-700 shadow-lg">Details</UButton>
     </div>
 </template>
 
 <script setup>
-    import Carousel from './carousel/Carousel.vue';
+    import { UButton } from '#components';
+import Carousel from './carousel/Carousel.vue';
     import { ref } from 'vue';
 
     const { dashboard } = defineProps(['dashboard']);

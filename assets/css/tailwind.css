@@ -4,19 +4,19 @@
 
 @layer components {
     .card {
-         @apply p-3 rounded-md bg-light h-full
+         @apply p-3 rounded-md bg-orange-100 h-full
     }
 
     .btn {
-        @apply bg-primary text-white px-3 py-2 rounded-md text-sm transition-colors duration-200 hover:bg-accent focus:outline shadow-md
+        @apply bg-green-700 shadow-md
     }
 
     h1 {
-        @apply text-xl font-bold text-primary
+        @apply text-xl font-bold text-orange-500
     }
 
     h2 {
-        @apply text-lg font-semibold text-primary
+        @apply text-lg font-semibold text-orange-500
     }
 
     h3 {

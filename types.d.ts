@@ -5,6 +5,7 @@
 //     id         Int     @id @default(autoincrement())
 //     email      String  @unique
 //     name       String?
+//     avatar     String?
 //     role       Role    @default(USER)
 //     dashboards Dashboard[]
 //     documents  Content[]
@@ -13,6 +14,7 @@ export interface User {
     id: number;
     email: string;
     name: string | null;
+    avatar: string | null;
     role: Role;
     dashboards: Dashboard[];
     documents: Content[];
