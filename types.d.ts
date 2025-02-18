@@ -53,4 +53,3 @@ export interface Dashboard {
     author: User;
     authorId: number;
 }
-<
