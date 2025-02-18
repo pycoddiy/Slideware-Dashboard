@@ -21,7 +21,6 @@
 
   const setCurrentSlide = (index) => {
     currentSlide.value = index;
-    console.log(index)
   };
 
   useInterval(3000, {callback: nextSlide})  

@@ -53,12 +53,4 @@ export interface Dashboard {
     author: User;
     authorId: number;
 }
-
-//   enum Role {
-//     USER
-//     ADMIN
-//   }
-enum Role {
-    USER,
-    ADMIN
-}
+<

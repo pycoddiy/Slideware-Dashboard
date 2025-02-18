@@ -9,26 +9,12 @@
 
 <script setup>
     import { UButton } from '#components';
-import Carousel from './carousel/Carousel.vue';
-    import { ref } from 'vue';
+    import Carousel from './carousel/Carousel.vue';
 
     const { dashboard } = defineProps(['dashboard']);
 
-    const thumbnails = ref([]);
-
-    function getThumbnails() {
-        for (let i = 0; i < dashboard.documents.length; i++) {
-            thumbnails.value.push(dashboard.documents[i].preview);
-        }
-    };
-
-    getThumbnails();
+    const thumbnails = dashboard.documents.map( (document) => document.preview);
 </script>
 
-<style scoped>
-    .thumb {
-        max-height: 140px;
-        max-width: 100%;
-        margin: 0 auto;
-    }
+<style>
 </style>
