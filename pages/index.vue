@@ -34,11 +34,14 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 async function handleLogin(event: FormSubmitEvent<Schema>) {
+    const body = event.data.email.toLowerCase(); // Make lowercase because email is case sensitive in Prisma findUnique
+
     try {
         const response = await $fetch('/api/login', {
             method: 'POST',
-            body: event.data.email,
+            body: { body },
         })
+        console.log(response.user)
     } catch (error) {
         console.error('Error logging in:', error);
         // Handle the error appropriately, e.g., display an error message

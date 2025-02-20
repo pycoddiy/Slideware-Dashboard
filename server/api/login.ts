@@ -1,6 +1,11 @@
 import prisma from "~/lib/prisma";
-import { User } from "~/types";
 
 export default eventHandler( async (event) => {
-    console.log(event)
+    const { body: email } = await readBody(event);
+    
+    const user = await prisma.user.findUnique({ 
+        where: {
+            email: email,
+        }})
+    return { user: user }
 });
