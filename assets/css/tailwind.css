@@ -4,7 +4,7 @@
 
 @layer components {
     .card {
-         @apply p-3 rounded-md bg-orange-100 h-full
+         @apply p-3 rounded-md bg-orange-100 h-full border border-orange-200 shadow-md
     }
 
     .btn {

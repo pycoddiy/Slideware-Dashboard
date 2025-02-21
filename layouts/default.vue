@@ -15,25 +15,15 @@
 
 import { UButton, UHorizontalNavigation } from '#components';
 //import { _sm } from '#tailwind-config/theme/boxShadow';
-import { useCurrentUser } from '~/composables/useUser';
+import { useCurrentUser, useCurrentUserAvatar } from '~/composables/useUser';
 
 // import { type User } from "~/types";
 import { Role } from '~/enums';
 
-// const user = ref<User>({
-//     name: 'Sergey Maydanov',
-//     email: 'sergey.maidanov@gmail.com',
-//     role: Role.ADMIN,
-//     avatar: 'files/avatars/default_avatar.png',
-//     id: 0,
-//     dashboards: [],
-//     documents: [],
-// });
 const currentUser = useCurrentUser();
+const currentUserAvatar = useCurrentUserAvatar();
 
-
-let roleStr: string = (currentUser.value.role === Role.ADMIN) ? 'Admin' : 'User';
-let userNameRole: string = currentUser.value.name + `(${roleStr})`;
+let userNameRole: string = currentUser.value.name + ` (${currentUser.value.role})`;
 
 const links = [
     [
@@ -57,7 +47,7 @@ const links = [
         {
             label: userNameRole,
             avatar: {
-                src: currentUser.value.avatar,
+                src: currentUserAvatar,
                 size: "xs",
             },
             to: '/profile',

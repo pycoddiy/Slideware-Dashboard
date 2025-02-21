@@ -19,11 +19,14 @@
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types"
 import { useCurrentUser } from "~/composables/useUser";
+import type { User } from "~/types"
 
+// Home page has login layout
 definePageMeta({
     layout: "login"
 });
 
+// Defining form fields and schema
 const formState = reactive({
     email: undefined,
     password: undefined,
@@ -36,7 +39,18 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>;
 
-const loginError = ref(false)
+// Handling form submit button, retrieving the current user
+const loginError = ref(false) // No authentication error is displayed by default
+
+function showAuthenticationError() {
+    const toast = useToast(); // Display error notification at the bottom of the page
+    toast.add({
+        title: "Authentication error", 
+        description: "Email and/or password are incorrect",
+        icon: "i-heroicons-exclamation-triangle-solid",
+        color: "red",
+    })
+}
 
 async function handleLogin(event: FormSubmitEvent<Schema>) {
     const body = event.data.email.toLowerCase(); // Make lowercase because email is case sensitive in Prisma findUnique
@@ -44,25 +58,24 @@ async function handleLogin(event: FormSubmitEvent<Schema>) {
     try {
         const response = await $fetch('/api/login', {
             method: 'POST',
-            body: { body },
+            body: { body }, // Querying server to find a user with given email
         })
-        console.log(response.user);
+        // console.log(response.user);
 
-        loginError.value = response?.user == null
-        if (loginError) {
-            const toast = useToast();
-            toast.add({
-                title: "Authentication error", 
-                description: "Email and/or password are incorrect",
-                icon: "i-heroicons-exclamation-triangle-solid",
-                color: "red",
-            })
+        loginError.value = response?.user == null; // No error if the user is found
+        // console.log(loginError.value);
+        if (loginError.value) {
+            showAuthenticationError();
         } else {
             const currentUser = useCurrentUser();
-            currentUser.value = response.user;
+            currentUser.value = response.user as User; // Update the current user
+            const isLoggedIn = useIsLoggedIn();
+            isLoggedIn.value = true;
+            navigateTo('/dashboards') 
         }
     } catch (error) {
         console.error('Error logging in:', error);
+        showAuthenticationError();
     }
 };
 
