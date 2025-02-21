@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Dashboards</h2>
+        <h2>My Dashboards</h2>
         <div class="grid grid-cols-4 gap-2">
             <div v-for="d in dashboards" :key="d.id">
                 <DashboardPreviewCard :dashboard="d" />

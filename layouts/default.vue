@@ -14,32 +14,36 @@
 <script setup lang="ts">
 
 import { UButton, UHorizontalNavigation } from '#components';
-import { _sm } from '#tailwind-config/theme/boxShadow';
+//import { _sm } from '#tailwind-config/theme/boxShadow';
+import { useCurrentUser } from '~/composables/useUser';
 
-import { type User } from "@/types.d.js";
+// import { type User } from "~/types";
 import { Role } from '~/enums';
 
-const user = ref<User>({
-    name: 'Sergey Maydanov',
-    email: 'sergey.maidanov@gmail.com',
-    role: Role.ADMIN,
-    avatar: 'files/avatars/default_avatar.png',
-    id: 0,
-    dashboards: [],
-    documents: [],
-});
+// const user = ref<User>({
+//     name: 'Sergey Maydanov',
+//     email: 'sergey.maidanov@gmail.com',
+//     role: Role.ADMIN,
+//     avatar: 'files/avatars/default_avatar.png',
+//     id: 0,
+//     dashboards: [],
+//     documents: [],
+// });
+const currentUser = useCurrentUser();
 
-let roleStr: string = (user.value?.role === Role.ADMIN) ? 'Admin' : 'User';
+
+let roleStr: string = (currentUser.value.role === Role.ADMIN) ? 'Admin' : 'User';
+let userNameRole: string = currentUser.value.name + `(${roleStr})`;
 
 const links = [
     [
         {
-            label: 'Dashboards',
+            label: 'My Dashboards',
             icon: 'i-heroicons-document-duplicate',
             to: '/Dashboards',
         },
         {
-            label: 'Edit Profile',
+            label: 'My Profile',
             icon: 'i-heroicons-user',
             to: '/profile',
         },
@@ -51,15 +55,11 @@ const links = [
     ],
     [
         {
-            label: user.value.name,
+            label: userNameRole,
             avatar: {
-                src: user.value.avatar,
+                src: currentUser.value.avatar,
                 size: "xs",
             },
-            to: '/profile',
-        },
-        {
-            label: 'Role: ' + roleStr,
             to: '/profile',
         },
     ],

@@ -8,7 +8,9 @@
             <UFormGroup name="password" label="Password" size="lg">
                 <UInput type="password" v-model="formState.password" />
             </UFormGroup>
-            <UButton type="submit" leading-icon="i-heroicons-lock-open" block class="mt-3 bg-green-700 shadow-lg">Login</UButton>
+            <UFormGroup v-slot="{ error }" :error="loginError && 'Authentication error'">
+                <UButton type="submit" leading-icon="i-heroicons-lock-open" class="mt-3 bg-green-700 shadow-lg">Login</UButton>
+            </UFormGroup>
         </UForm>
     </div>
 </template>
@@ -16,6 +18,7 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types"
+import { useCurrentUser } from "~/composables/useUser";
 
 definePageMeta({
     layout: "login"
@@ -33,6 +36,8 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>;
 
+const loginError = ref(false)
+
 async function handleLogin(event: FormSubmitEvent<Schema>) {
     const body = event.data.email.toLowerCase(); // Make lowercase because email is case sensitive in Prisma findUnique
 
@@ -41,10 +46,23 @@ async function handleLogin(event: FormSubmitEvent<Schema>) {
             method: 'POST',
             body: { body },
         })
-        console.log(response.user)
+        console.log(response.user);
+
+        loginError.value = response?.user == null
+        if (loginError) {
+            const toast = useToast();
+            toast.add({
+                title: "Authentication error", 
+                description: "Email and/or password are incorrect",
+                icon: "i-heroicons-exclamation-triangle-solid",
+                color: "red",
+            })
+        } else {
+            const currentUser = useCurrentUser();
+            currentUser.value = response.user;
+        }
     } catch (error) {
         console.error('Error logging in:', error);
-        // Handle the error appropriately, e.g., display an error message
     }
 };
 
