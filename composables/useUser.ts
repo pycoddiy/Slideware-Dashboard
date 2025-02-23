@@ -27,7 +27,7 @@ export const useIsAdmin = () => {
 
 export const useCurrentUserAvatar = () => {
     let avatar = useCurrentUser().value.avatar;
-    if (!avatar || avatar.length == 0) {
+    if (!avatar?.length) {
         avatar = 'files/avatars/default_avatar.png';
     }
     return avatar; 

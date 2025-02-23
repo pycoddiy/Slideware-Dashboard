@@ -14,8 +14,9 @@
     "@nuxt/ui": "^2.21.0",
     "@prisma/nuxt": "^0.3.0",
     "@vueuse/core": "^12.5.0",
-    "nuxt": "^3.15.4",
+    "nuxt": "^3.6.0",
     "nuxt-file-storage": "^0.2.9",
+    "uuid": "^11.1.0",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.24.2"
