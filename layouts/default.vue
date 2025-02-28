@@ -13,17 +13,11 @@
 
 <script setup lang="ts">
 
-import { UButton, UHorizontalNavigation } from '#components';
-//import { _sm } from '#tailwind-config/theme/boxShadow';
-import { useCurrentUser, useCurrentUserAvatar } from '~/composables/useUser';
+import { UHorizontalNavigation } from '#components';
 
-// import { type User } from "~/types";
-import { Role } from '~/enums';
+const { cUser } = useCUser();
 
-const currentUser = useCurrentUser();
-const currentUserAvatar = useCurrentUserAvatar();
-
-let userNameRole: string = currentUser.value.name + ` (${currentUser.value.role})`;
+let userNameRole: string = cUser.value.name + ` (${cUser.value.role})`;
 
 const links = [
     [
@@ -47,7 +41,7 @@ const links = [
         {
             label: userNameRole,
             avatar: {
-                src: currentUserAvatar,
+                src: cUser.value.avatar,
                 size: "xs",
             },
             to: '/profile',

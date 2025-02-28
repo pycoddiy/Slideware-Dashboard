@@ -7,5 +7,10 @@ export default eventHandler( async (event) => {
         where: {
             email: email,
         }})
+    if (user) {
+        if (!user.avatar) {
+            user.avatar = 'files/avatars/default_avatar.png'
+        }
+    }
     return { user: user }
 });

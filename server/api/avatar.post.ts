@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     const file = formData.find( (item:any) => item.name === 'avatar')
     const originalFileName = file.filename
 
-    const path = './public/files/avatars/' + v4() + '.' + originalFileName.split('.').pop()
-    await writeFile(path, file.data)
+    const path = 'files/avatars/' + v4() + '.' + originalFileName.split('.').pop()
+    await writeFile('public/' + path, file.data)
     return { path }
 })

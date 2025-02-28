@@ -18,7 +18,6 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types"
-import { useCurrentUser } from "~/composables/useUser";
 import type { User } from "~/types"
 
 // Home page has login layout
@@ -46,7 +45,7 @@ function showAuthenticationError() {
     const toast = useToast(); // Display error notification at the bottom of the page
     toast.add({
         title: "Authentication error", 
-        description: "Email and/or password are incorrect",
+        description: `Email and/or password are incorrect.`,
         icon: "i-heroicons-exclamation-triangle-solid",
         color: "red",
     })
@@ -54,6 +53,7 @@ function showAuthenticationError() {
 
 async function handleLogin(event: FormSubmitEvent<Schema>) {
     const body = event.data.email.toLowerCase(); // Make lowercase because email is case sensitive in Prisma findUnique
+    const { cUser, setCUser } = useCUser();
 
     try {
         const response = await $fetch('/api/login', {
@@ -67,8 +67,7 @@ async function handleLogin(event: FormSubmitEvent<Schema>) {
         if (loginError.value) {
             showAuthenticationError();
         } else {
-            const currentUser = useCurrentUser();
-            currentUser.value = response.user as User; // Update the current user
+            setCUser(response.user as User); // Update the current user
             const isLoggedIn = useIsLoggedIn();
             isLoggedIn.value = true;
             navigateTo('/dashboards') 
