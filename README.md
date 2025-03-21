@@ -27,3 +27,5 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss']
 })
 ```
+
+//akdsjajdab ddjkadabdahakjadladb
